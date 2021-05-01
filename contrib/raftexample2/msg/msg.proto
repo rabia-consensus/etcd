@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+/*
+  GoGo-Protobuf:
+    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf --gogoslick_out=. ./msg.proto
+  Protobuf:
+    protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/google/protobuf --go_out=. ./msg.proto
+ */
+package msg;
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message Command {
+  uint32 CliId = 1;
+  uint32 CliSeq = 2;
+  uint32 SvrSeq = 3; // todo: not used, remove?
+  repeated string Commands = 4;
+}
+
+message ConsensusObj {
+  uint32 ProId = 1;
+  uint32 ProSeq = 2;
+  uint32 SvrSeq = 3;  // todo: not used, remove?
+  bool IsNull = 4;    // todo: not used, remove?
+  repeated uint32 CliIds = 5;
+  repeated uint32 CliSeqs = 6;
+  repeated string Commands = 7;
+}
+
